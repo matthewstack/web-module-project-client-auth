@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-const FriendsList = () => {
-  const [friends, setFriends] = useState([]);
-
+import { Link } from "react-router-dom";
+const FriendsList = (props) => {
+  const { friends, setFriends } = props;
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -20,11 +20,13 @@ const FriendsList = () => {
     <div>
       <h1>FRIENDS LIST</h1>
       {friends.map((friend) => (
-        <div>
-          <h2>
-            - {friend.name} - {friend.email}
-          </h2>
-        </div>
+        <Link to={`/friend/${friend.id}`}>
+          <div>
+            <h2>
+              - {friend.name} - {friend.email}
+            </h2>
+          </div>
+        </Link>
       ))}
     </div>
   );
